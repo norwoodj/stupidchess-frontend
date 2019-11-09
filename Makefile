@@ -7,6 +7,7 @@ default:
 	@echo "Available Targets:"
 	@echo
 	@echo "  clean           - Clean up build artifacts"
+	@echo "  deb             - Build debian packages for deploying stupidchess"
 	@echo "  down            - Tear down the local docker database"
 	@echo "  nginx           - Build the nginx docker image"
 	@echo "  webpack_builder - Build the nginx docker image"
@@ -91,4 +92,5 @@ down:
 .PHONY: clean
 clean: version.txt
 	sed -i "" "s|$(shell cat version.txt)|$(VERSION_PLACEHOLDER)|g" package.json package-lock.json deb/*/DEBIAN/control
-	rm -rf _version.json src/_version.json version.txt deb/stupidchess-nginx/opt/stupidchess/nginx/nginx.conf deb/stupidchess-nginx/opt/stupidchess/dist
+	rm -rf dist deb/stupidchess-nginx/opt/stupidchess/dist
+	rm -f _version.json src/_version.json version.txt deb/stupidchess-nginx/opt/stupidchess/nginx/nginx.conf *.deb
