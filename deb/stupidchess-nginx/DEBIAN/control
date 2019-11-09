@@ -1,0 +1,9 @@
+Package: stupidchess-nginx
+Version: _VERSION
+Section: base
+Priority: optional
+Architecture: armhf
+Depends: nginx
+Maintainer: John Norwood <norwood.john.m@gmail.com>
+Description: stupidchess-nginx
+ A nginx config for a stupidchess nginx instance
