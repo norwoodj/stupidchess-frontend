@@ -1,5 +1,5 @@
-Stupid Chess
-============
+stupidchess-frontend
+====================
 
 ![active-game](board.png)
 
@@ -28,6 +28,9 @@ projects as well as a way to get the rules of a game that I really enjoy codifie
 
 Additionally, I'm a professional software developer, and my hope is that you, dear recruiter, see this
 as an indication of my skillset.
+
+This codebase holds the frontend code for the stupidchess project, and relies on images built by
+the related [backend project](https://github.com/norwoodj/stupidchess-backend).
 
 
 ### Building and Developing Locally

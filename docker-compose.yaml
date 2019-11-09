@@ -1,0 +1,51 @@
+version: "3"
+
+volumes:
+  socket-volume:
+  frontend-public-volume:
+
+services:
+  mongo:
+    image: mongo:2.6.4
+    ports:
+      - 27017:27017
+
+  nginx:
+    image: jnorwood/stupidchess-nginx:current
+    build:
+      context: .
+      dockerfile: docker/Dockerfile-nginx
+    entrypoint:
+      - nginx
+      - -c
+      - /etc/nginx/local/nginx.conf
+      - -g
+      - daemon off;
+    volumes:
+      - ./etc/nginx:/etc/nginx/local:ro
+      - socket-volume:/var/run
+      - frontend-public-volume:/opt/stupidchess/dist:ro
+    ports:
+      - 80:80
+
+  uwsgi:
+    image: jnorwood/stupidchess-uwsgi:release-20190701-1756
+    environment:
+      - JCONFIGURE_ACTIVE_PROFILES=LCL
+      - JCONFIGURE_CONFIG_DIRECTORIES=/opt/stupidchess/server/config
+    volumes:
+      - socket-volume:/var/run
+
+  webpack_builder:
+    image: jnorwood/stupidchess-webpack_builder:current
+    build:
+      context: .
+      dockerfile: docker/Dockerfile-webpack_builder
+    entrypoint:
+      - node_modules/webpack/bin/webpack.js
+      - --watch
+      - --devtool
+      - source-map
+    volumes:
+      - ./src:/opt/stupidchess/src:ro
+      - frontend-public-volume:/opt/stupidchess/dist
