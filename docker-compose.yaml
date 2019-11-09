@@ -29,10 +29,10 @@ services:
       - 80:80
 
   uwsgi:
-    image: jnorwood/stupidchess-uwsgi:release-20190701-1756
+    image: jnorwood/stupidchess-uwsgi:19.1109.0
     environment:
       - JCONFIGURE_ACTIVE_PROFILES=LCL
-      - JCONFIGURE_CONFIG_DIRECTORIES=/opt/stupidchess/server/config
+      - JCONFIGURE_CONFIG_DIRECTORIES=/opt/stupidchess/config
     volumes:
       - socket-volume:/var/run
 
