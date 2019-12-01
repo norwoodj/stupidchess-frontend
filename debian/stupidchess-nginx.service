@@ -1,0 +1,15 @@
+[Unit]
+Description=stupidchess nginx service
+After=syslog.target network.target remote-fs.target nss-lookup.target
+
+[Service]
+Type=forking
+PIDFile=/var/run/stupidchess-nginx.pid
+ExecStartPre=/usr/sbin/nginx -t -c /opt/stupidchess/nginx.conf
+ExecStart=/usr/sbin/nginx -c /opt/stupidchess/nginx.conf
+ExecReload=/usr/sbin/nginx -c /opt/stupidchess/nginx.conf -s reload
+ExecStop=/bin/kill -s QUIT $MAINPID
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

@@ -1,4 +1,4 @@
-version: "3"
+version: "3.7"
 
 volumes:
   socket-volume:
@@ -8,7 +8,8 @@ services:
   mongo:
     image: mongo:2.6.4
     ports:
-      - 27017:27017
+      - published: 27017
+        target: 27017
 
   nginx:
     image: jnorwood/stupidchess-nginx:current
@@ -18,23 +19,34 @@ services:
     entrypoint:
       - nginx
       - -c
-      - /etc/nginx/local/nginx.conf
+      - /opt/stupidchess/nginx.conf
       - -g
       - daemon off;
     volumes:
-      - ./etc/nginx:/etc/nginx/local:ro
-      - socket-volume:/var/run
-      - frontend-public-volume:/opt/stupidchess/dist:ro
+      - type: bind
+        source: ./etc/nginx/nginx.conf
+        target: /opt/stupidchess/nginx.conf
+        read_only: true
+      - type: volume
+        source: frontend-public-volume
+        target: /opt/stupidchess/dist
+        read_only: true
+      - type: volume
+        source: socket-volume
+        target: /opt/stupidchess/sockets
     ports:
-      - 80:80
+      - published: 80
+        target: 23080
 
   uwsgi:
-    image: jnorwood/stupidchess-uwsgi:19.1109.0
+    image: jnorwood/stupidchess-uwsgi:19.1205.0
     environment:
-      - JCONFIGURE_ACTIVE_PROFILES=LCL
-      - JCONFIGURE_CONFIG_DIRECTORIES=/opt/stupidchess/config
+      JCONFIGURE_ACTIVE_PROFILES: LCL
+      JCONFIGURE_CONFIG_DIRECTORIES: /opt/stupidchess/config
     volumes:
-      - socket-volume:/var/run
+      - type: volume
+        source: socket-volume
+        target: /opt/stupidchess/sockets
 
   webpack_builder:
     image: jnorwood/stupidchess-webpack_builder:current
@@ -47,5 +59,10 @@ services:
       - --devtool
       - source-map
     volumes:
-      - ./src:/opt/stupidchess/src:ro
-      - frontend-public-volume:/opt/stupidchess/dist
+      - type: bind
+        source: ./src
+        target: /opt/stupidchess/src
+        read_only: true
+      - type: volume
+        source: frontend-public-volume
+        target: /opt/stupidchess/dist

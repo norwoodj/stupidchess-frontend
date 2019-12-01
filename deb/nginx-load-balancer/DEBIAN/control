@@ -1,9 +1,0 @@
-Package: nginx-load-balancer
-Version: _VERSION
-Section: base
-Priority: optional
-Architecture: armhf
-Depends: nginx
-Maintainer: John Norwood <norwood.john.m@gmail.com>
-Description: nginx-load-balancer
- A nginx config that can load balance an http service between a list of hosts

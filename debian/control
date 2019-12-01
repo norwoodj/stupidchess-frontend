@@ -1,0 +1,9 @@
+Source: stupidchess-nginx
+Maintainer: John Norwood <norwood.john.m@gmail.com>
+
+Package: stupidchess-nginx
+Priority: extra
+Architecture: any
+Depends: nginx
+Description: stupidchess-nginx
+  stupidchess nginx instance

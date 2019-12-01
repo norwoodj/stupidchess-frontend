@@ -1,9 +1,27 @@
 DOCKER_REPOSITORY := jnorwood
-NGINX_IMAGE := nginx:1.13.12
 VERSION_PLACEHOLDER := _VERSION
+VERSION_FILES := package.json package-lock.json
 
-.PHONY: default
-default:
+##
+# Build targets
+##
+main: dist
+
+all: main push
+
+release: all
+	git tag $(cat version.txt)
+	git push --tags
+
+node_modules:
+	npm install
+
+dist: node_modules update-versions version.json
+	cp version.json src/
+	./node_modules/webpack/bin/webpack.js -p --progress
+
+.PHONY: help
+help:
 	@echo "Available Targets:"
 	@echo
 	@echo "  clean           - Clean up build artifacts"
@@ -12,6 +30,7 @@ default:
 	@echo "  nginx           - Build the nginx docker image"
 	@echo "  webpack_builder - Build the nginx docker image"
 	@echo "  push            - Push the nginx docker image"
+	@echo "  release         - Build and deploy assets, tag a release"
 	@echo "  run             - Run the app locally in docker"
 	@echo "  run-no-build    - Run the app locally in docker without rebuilding the image"
 
@@ -20,54 +39,44 @@ default:
 # Versioning targets
 ##
 version.txt:
-	echo "$(shell docker run --rm --entrypoint date $(NGINX_IMAGE) --utc "+%y.%m%d.0")" > version.txt
+	date --utc "+%y.%m%d.0" > version.txt
 
-_version.json: version.txt
-	echo "{\"version\": \"$(shell cat version.txt)\"}" > _version.json
+version.json: version.txt
+	echo '{"build-timestamp": "$(shell date --utc --iso-8601=seconds)", "revision": "$(shell git rev-parse HEAD)", "version": "$(shell cat version.txt)"}' | jq . > version.json
 
 update-versions: version.txt
-	sed -i "" "s|$(VERSION_PLACEHOLDER)|$(shell cat version.txt)|g" package.json package-lock.json deb/*/DEBIAN/control
+	sed -i "s|$(VERSION_PLACEHOLDER)|$(shell cat version.txt)|g" $(VERSION_FILES)
 	touch update-versions
+
+update-deb-version: version.txt
+	sed -i "s|$(VERSION_PLACEHOLDER)|$(shell cat version.txt)|g" debian/changelog
+	touch update-deb-version
+
+
+##
+# debian packaging
+##
+.PHONY: deb
+deb: update-deb-version
+	debuild
 
 
 ##
 # Docker images
 ##
 .PHONY: nginx
-nginx: _version.json update-package-json
-	cp _version.json src/
+nginx: version.json update-versions
+	cp version.json src/
 	docker-compose build nginx
 
 .PHONY: webpack_builder
-webpack_builder: update-package-json
+webpack_builder: update-versions
 	docker-compose build webpack_builder
 
 .PHONY: push
 push: nginx
 	docker tag $(DOCKER_REPOSITORY)/stupidchess-nginx:current $(DOCKER_REPOSITORY)/stupidchess-nginx:$(shell cat version.txt)
 	docker push $(DOCKER_REPOSITORY)/stupidchess-nginx:$(shell cat version.txt)
-
-
-##
-# debian packaging
-##
-node_modules:
-	npm install
-
-dist: node_modules update-versions _version.json
-	cp _version.json src/
-	./node_modules/webpack/bin/webpack.js -p --progress
-
-nginx-load-balancer-$(shell cat version.txt).deb: update-versions
-	dpkg-deb -b deb/nginx-load-balancer nginx-load-balancer-$(shell cat version.txt).deb
-
-stupidchess-nginx-$(shell cat version.txt).deb: dist
-	cp etc/nginx/nginx.conf deb/stupidchess-nginx/opt/stupidchess/nginx/nginx.conf
-	cp -R dist deb/stupidchess-nginx/opt/stupidchess/dist
-	dpkg-deb -b deb/stupidchess-nginx stupidchess-nginx-$(shell cat version.txt).deb
-
-.PHONY: deb
-deb: nginx-load-balancer-$(shell cat version.txt).deb stupidchess-nginx-$(shell cat version.txt).deb
 
 
 ##
@@ -91,6 +100,10 @@ down:
 
 .PHONY: clean
 clean: version.txt
-	sed -i "" "s|$(shell cat version.txt)|$(VERSION_PLACEHOLDER)|g" package.json package-lock.json deb/*/DEBIAN/control
-	rm -rf dist deb/stupidchess-nginx/opt/stupidchess/dist
-	rm -f _version.json src/_version.json version.txt deb/stupidchess-nginx/opt/stupidchess/nginx/nginx.conf *.deb
+	sed -i "s|$(shell cat version.txt)|$(VERSION_PLACEHOLDER)|g" $(VERSION_FILES)
+	rm -rf dist version.json src/version.json version.txt update-versions
+
+.PHONY: cleaner
+cleaner: version.txt
+	sed -i "s|$(shell cat version.txt)|$(VERSION_PLACEHOLDER)|g" $(VERSION_FILES) debian/changelog
+	rm -rf dist version.json src/version.json version.txt update-versions update-deb-version

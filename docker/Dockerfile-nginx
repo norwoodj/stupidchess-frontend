@@ -28,5 +28,11 @@ LABEL maintainer=norwood.john.m@gmail.com
 ARG APP_DIR=/opt/stupidchess
 WORKDIR ${APP_DIR}
 
+RUN mkdir -p ${APP_DIR}/logs \
+    && ln -s /dev/stdout ${APP_DIR}/logs/nginx-access.log \
+    && ln -s /dev/stderr ${APP_DIR}/logs/nginx-errors.log
+
 COPY --from=artifacts ${APP_DIR}/dist ./dist
-COPY etc/nginx/nginx.conf /etc/nginx/nginx.conf
+COPY etc/nginx/nginx.conf ${APP_DIR}/nginx.conf
+
+ENTRYPOINT ["nginx", "-c", "/opt/stupidchess/nginx.conf"]

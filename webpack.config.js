@@ -25,7 +25,7 @@ module.exports = {
         new webpack.optimize.ModuleConcatenationPlugin(),
         new webpack.optimize.UglifyJsPlugin({minimize: true}),
         new CopyWebpackPlugin([
-            {from: "src/_version.json"},
+            {from: "src/version.json"},
             {from: "src/css", to: "css/"},
             {from: "src/img", to: "img/"},
             {from: "src/favicons", to: "favicons/"},
