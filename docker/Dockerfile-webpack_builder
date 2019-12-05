@@ -1,4 +1,4 @@
-FROM node:8.3-alpine
+FROM node:10.15-alpine
 LABEL maintainer=norwood.john.m@gmail.com
 
 WORKDIR /opt/stupidchess
