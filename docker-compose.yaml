@@ -24,7 +24,7 @@ services:
       - daemon off;
     volumes:
       - type: bind
-        source: ./etc/nginx/nginx.conf
+        source: ./nginx.conf
         target: /opt/stupidchess/nginx.conf
         read_only: true
       - type: volume
