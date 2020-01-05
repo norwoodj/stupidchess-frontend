@@ -12,7 +12,7 @@ configuration, build tools, and custom docker images I've built to deploy this a
 on this platform.
 
 You can see this particular project at https://github.com/norwoodj/stupidchess
-You might also visit my other project https://hashbash.jmn23.com
+You might also visit my other project https://hashbash.dev
 
 Stupid Chess is a variant on the popular Chess and checkers board games that John Norwood (that's me)
 and some of his college friends invented when we stumbled across a chess board that had been ripped
