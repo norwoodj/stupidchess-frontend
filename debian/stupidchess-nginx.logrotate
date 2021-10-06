@@ -6,4 +6,7 @@
     missingok
     notifempty
     dateext
+    postrotate
+        [ -f /run/stupidchess-nginx.pid ] && kill -USR1 `cat /run/stupidchess-nginx.pid`
+    endscript
 }
