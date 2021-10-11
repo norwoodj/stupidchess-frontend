@@ -1,4 +1,4 @@
-/var/logs/stupidchess/nginx-*.log {
+/var/log/stupidchess/nginx-*.log {
     daily
     rotate 7
     compress
