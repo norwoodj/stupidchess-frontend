@@ -1,4 +1,4 @@
-/opt/stupidchess/logs/nginx-*.log {
+/var/logs/stupidchess/nginx-*.log {
     daily
     rotate 7
     compress
@@ -7,6 +7,6 @@
     notifempty
     dateext
     postrotate
-        [ -f /run/stupidchess-nginx.pid ] && kill -USR1 `cat /run/stupidchess-nginx.pid`
+        [ -f /run/stupidchess/nginx.pid ] && kill -USR1 `cat /run/stupidchess/nginx.pid`
     endscript
 }

@@ -1,2 +1,2 @@
-dist opt/stupidchess
-nginx.conf opt/stupidchess
+dist etc/stupidchess
+nginx.conf etc/stupidchess
