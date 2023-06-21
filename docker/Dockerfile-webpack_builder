@@ -1,7 +1,7 @@
 FROM node:10.15-alpine
 LABEL maintainer=norwood.john.m@gmail.com
 
-WORKDIR /opt/stupidchess
+WORKDIR /etc/stupidchess
 COPY package.json .
 RUN npm install
 

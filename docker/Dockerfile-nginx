@@ -4,7 +4,7 @@
 FROM node:10.15-alpine AS artifacts
 LABEL maintainer=norwood.john.m@gmail.com
 
-ARG APP_DIR=/opt/stupidchess
+ARG APP_DIR=/etc/stupidchess
 WORKDIR ${APP_DIR}
 
 COPY package.json .
@@ -22,17 +22,23 @@ RUN node_modules/webpack/bin/webpack.js -p --progress
 # This stage copies the generated dist archive from the previous stage of the build into the application home, and adds the
 # nginx config file
 ##
-FROM nginx:1.13.12
+FROM nginx:1.25.1-bookworm@sha256:d2b2f2980e9ccc570e5726b56b54580f23a018b7b7314c9eaff7e5e479c78657
 LABEL maintainer=norwood.john.m@gmail.com
 
-ARG APP_DIR=/opt/stupidchess
+ARG APP_DIR=/etc/stupidchess
+ARG LOG_DIR=/var/log/stupidchess
+ARG RUNTIME_DIR=/run/stupidchess-frontend
+ARG USER=stupidchess
+
 WORKDIR ${APP_DIR}
 
-RUN mkdir -p ${APP_DIR}/logs \
-    && ln -s /dev/stdout ${APP_DIR}/logs/nginx-access.log \
-    && ln -s /dev/stderr ${APP_DIR}/logs/nginx-errors.log
+RUN addgroup ${USER} && adduser --ingroup ${USER} ${USER} \
+    && mkdir -p ${LOG_DIR} \
+    && mkdir -p ${RUNTIME_DIR} \
+    && ln -s /dev/stdout ${LOG_DIR}/nginx-access.log \
+    && ln -s /dev/stderr ${LOG_DIR}/nginx-errors.log
 
 COPY --from=artifacts ${APP_DIR}/dist ./dist
 COPY nginx.conf ${APP_DIR}/nginx.conf
 
-ENTRYPOINT ["nginx", "-c", "/opt/stupidchess/nginx.conf"]
+ENTRYPOINT ["nginx", "-c", "/etc/stupidchess/nginx.conf", "-g", "daemon off;"]
