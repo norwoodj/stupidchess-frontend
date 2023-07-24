@@ -27,13 +27,12 @@ LABEL maintainer=norwood.john.m@gmail.com
 
 ARG APP_DIR=/etc/stupidchess
 ARG LOG_DIR=/var/log/stupidchess
-ARG RUNTIME_DIR=/run/stupidchess-frontend
+ARG RUNTIME_DIR=/run/stupidchess-nginx
 ARG USER=stupidchess
 
 WORKDIR ${APP_DIR}
 
-RUN addgroup ${USER} && adduser --ingroup ${USER} ${USER} \
-    && mkdir -p ${LOG_DIR} \
+RUN mkdir -p ${LOG_DIR} \
     && mkdir -p ${RUNTIME_DIR} \
     && ln -s /dev/stdout ${LOG_DIR}/nginx-access.log \
     && ln -s /dev/stderr ${LOG_DIR}/nginx-errors.log
@@ -41,4 +40,4 @@ RUN addgroup ${USER} && adduser --ingroup ${USER} ${USER} \
 COPY --from=artifacts ${APP_DIR}/dist ./dist
 COPY nginx.conf ${APP_DIR}/nginx.conf
 
-ENTRYPOINT ["nginx", "-c", "/etc/stupidchess/nginx.conf", "-g", "daemon off;"]
+ENTRYPOINT ["nginx", "-c", "/etc/stupidchess/nginx.conf", "-g", "daemon off; user root;"]

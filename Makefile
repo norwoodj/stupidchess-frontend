@@ -96,7 +96,7 @@ run-no-build:
 ##
 .PHONY: down
 down:
-	docker-compose down
+	docker-compose down --volumes
 
 .PHONY: clean
 clean: version.txt

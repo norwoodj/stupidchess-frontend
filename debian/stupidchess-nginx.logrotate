@@ -7,6 +7,6 @@
     notifempty
     dateext
     postrotate
-        [ -f /run/stupidchess-frontend/nginx.pid ] && kill -USR1 `cat /run/stupidchess-frontend/nginx.pid`
+        systemctl reload stupidchess.nginx
     endscript
 }
