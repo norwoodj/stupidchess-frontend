@@ -1,1 +1,86 @@
-stupidchess-nginx (_VERSION) stable; urgency=low
+stupidchess-nginx (23.0724.0) unstable; urgency=low
+
+  * chore: Cleans up nginx and uwsgi configs a bit
+  * Pins the webpack-builder base image tags as well
+
+ -- John Norwood <norwood.john.m@gmail.com>  Mon, 24 Jul 2023 19:34:06 +0100
+
+stupidchess-nginx (23.0621.0) unstable; urgency=low
+
+  * Fixes docker run configuration
+
+ -- John Norwood <jnorwood@cloudflare.com>  Wed, 21 Jun 2023 13:05:12 +0100
+
+stupidchess-nginx (21.1027.1) unstable; urgency=low
+
+  * fix: stupid runtime directories can't be shared
+
+ -- John Norwood <norwood.john.m@gmail.com>  Wed, 27 Oct 2021 04:31:34 +0000
+
+stupidchess-nginx (21.1027.0) unstable; urgency=low
+
+  * fix: adds runtime directory for pidfile
+
+ -- John Norwood <norwood.john.m@gmail.com>  Wed, 27 Oct 2021 03:38:33 +0000
+
+stupidchess-nginx (21.1011.0) unstable; urgency=low
+
+  * fix: corrects log paths
+  * feat: cleans up deb installation a bit moving files to more sensible places
+
+ -- John Norwood <norwood.john.m@gmail.com>  Mon, 11 Oct 2021 15:04:52 +0000
+
+stupidchess-nginx (21.1006.0) unstable; urgency=low
+
+  * fix: adds postrotate script to fix nginx log exporters
+
+ -- John Norwood <norwood.john.m@gmail.com>  Wed, 6 Oct 2021 21:21:35 +0000
+
+stupidchess-nginx (21.0828.0) unstable; urgency=low
+
+  * fix: update nginx pid file path
+
+ -- John Norwood <norwood.john.m@gmail.com>  Sat, 28 Aug 2021 16:25:13 +0000
+
+stupidchess-nginx (20.0105.0) unstable; urgency=low
+
+  * fix: updates hashbash link
+
+ -- John Norwood <norwood.john.m@gmail.com>  Sun, 5 Jan 2020 17:20:42 +0000
+
+stupidchess-nginx (19.1220.0) unstable; urgency=low
+
+  * chore: npm install cleans up package.json
+  * feat: fixes the licenses
+
+ -- John Norwood <norwood.john.m@gmail.com>  Fri, 20 Dec 2019 00:08:55 +0000
+
+stupidchess-nginx (19.1207.0) unstable; urgency=low
+
+  * fix: Fixes logging config
+
+ -- John Norwood <norwood.john.m@gmail.com>  Sat, 7 Dec 2019 06:29:22 +0000
+
+stupidchess-nginx (19.1205.1) unstable; urgency=low
+
+  * fix: updates docker image versions to ones used in build
+  * fix: adds socket directory and adds the pid file so nginx service starts
+
+ -- John Norwood <norwood.john.m@gmail.com>  Thu, 5 Dec 2019 22:03:29 +0000
+
+stupidchess-nginx (19.1205.0) unstable; urgency=low
+
+  * chore: moves nginx.conf to top directory because why not
+  * Updates makefile to build everything on a release and builds debian package correctly
+  * fix: Adds necessary proxy headers to load balancer nginx config
+
+ -- John Norwood <norwood.john.m@gmail.com>  Thu, 5 Dec 2019 03:40:26 +0000
+
+stupidchess-nginx (19.1111) unstable; urgency=low
+
+  * fix: updates port for stupidchess-nginx and adds better logging
+
+ -- John Norwood <norwood.john.m@gmail.com>  Mon, 11 Nov 2019 02:43:59 +0000
+
+stupidchess-nginx (19.1109.0) unstable; urgency=low
+
