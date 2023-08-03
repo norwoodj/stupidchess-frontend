@@ -1,3 +1,10 @@
+stupidchess-nginx (23.0803.0) jammy; urgency=medium
+
+  * chore: testing release process
+  * chore: Updates js files to handle new release process
+
+ -- John Norwood <norwood.john.m@gmail.com>  Thu, 03 Aug 2023 02:37:48 +0100
+
 stupidchess-nginx (23.0724.0) unstable; urgency=low
 
   * chore: Cleans up nginx and uwsgi configs a bit
