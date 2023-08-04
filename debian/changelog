@@ -1,3 +1,10 @@
+stupidchess-nginx (2023.8.0) jammy; urgency=medium
+
+  * fix: Fixes debuild process by adding back build target to Makefile, updates package-lock file
+  * chore: adds prettier configuration and runs to format and switches to new release tag format
+
+ -- John Norwood <jnorwood@cloudflare.com>  Fri, 04 Aug 2023 14:54:05 +0100
+
 stupidchess-nginx (23.0803.0) jammy; urgency=medium
 
   * chore: testing release process
