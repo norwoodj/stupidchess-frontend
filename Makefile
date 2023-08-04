@@ -1,15 +1,13 @@
 DOCKER_REPOSITORY := jnorwood
 
-help:
-	@echo "Available Targets:"
-	@echo
-	@echo "  deb             - Build debian packages for deploying stupidchess"
-	@echo "  down            - Tear down the local docker database"
-	@echo "  nginx           - Build the nginx docker image"
-	@echo "  webpack_builder - Build the nginx docker image"
-	@echo "  push            - Push the nginx docker image"
-	@echo "  release         - Create a release commit"
-	@echo "  run             - Run the app locally in docker"
+build: dist
+
+dist: node_modules version.json
+	mv version.json src/
+	./node_modules/webpack/bin/webpack.js -p --progress
+
+node_modules:
+	npm install
 
 release:
 	./release.sh
@@ -38,3 +36,6 @@ run: nginx
 
 down:
 	docker-compose down --volumes
+
+clean:
+	rm -vf version.json src/version.json
