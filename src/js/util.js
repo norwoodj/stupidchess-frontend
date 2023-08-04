@@ -13,6 +13,7 @@ function toTitleCase(input) {
 
 function range(size) {
     let range = [];
+
     for (let i = 0; i < size; ++i) {
         range[i] = i;
     }
