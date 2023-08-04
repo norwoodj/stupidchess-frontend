@@ -52,7 +52,6 @@ img {
     color: yellow;
 }
 
-
 .uuid-link {
     font-family: monospace;
 }
@@ -197,7 +196,7 @@ img {
 }
 
 #sidedrawer strong:hover {
-    background-color: #E0E0E0;
+    background-color: #e0e0e0;
 }
 
 #sidedrawer strong + ul > li {

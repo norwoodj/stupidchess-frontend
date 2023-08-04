@@ -1,4 +1,3 @@
-
 export default class RecordService {
     constructor(http, errorHandler) {
         this.http = http;
@@ -6,11 +5,13 @@ export default class RecordService {
     }
 
     getUserGameRecords(userUuid, gameType, includeOnePlayerGames) {
-        return new Promise(resolve => {
+        return new Promise((resolve) => {
             this.http.ajax({
                 type: "GET",
-                url: `/api/record/?userUuid=${userUuid}&includeOnePlayerGames=${includeOnePlayerGames}${gameType != null ? `&gameType=${gameType}` : ""}`,
-                success: user_records => resolve(user_records),
+                url: `/api/record/?userUuid=${userUuid}&includeOnePlayerGames=${includeOnePlayerGames}${
+                    gameType != null ? `&gameType=${gameType}` : ""
+                }`,
+                success: (user_records) => resolve(user_records),
                 error: this.errorHandler
             });
         });

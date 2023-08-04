@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import UpdatingSelect from "../components/updating-select";
 
-
 export default class ColorSetupSelect extends React.Component {
     render() {
         if (!this.props.gameState.inBoardSetupMode()) {
@@ -10,7 +9,10 @@ export default class ColorSetupSelect extends React.Component {
         }
 
         return (
-            <div id="color-setup-select" className="content-block game-page-select">
+            <div
+                id="color-setup-select"
+                className="content-block game-page-select"
+            >
                 <UpdatingSelect
                     label="Select Color to set up"
                     optionChangeHandler={this.props.colorChangeHandler}

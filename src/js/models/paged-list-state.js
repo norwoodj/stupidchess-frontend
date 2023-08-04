@@ -1,4 +1,3 @@
-
 export default class PagedListState {
     constructor() {
         this.loading = true;

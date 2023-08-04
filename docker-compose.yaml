@@ -9,7 +9,7 @@ services:
         target: 27017
 
   uwsgi:
-    image: jnorwood/stupidchess-uwsgi:23.0724.0
+    image: jnorwood/stupidchess-uwsgi:2023.8.0
     environment:
       JCONFIGURE_ACTIVE_PROFILES: LCL
       JCONFIGURE_CONFIG_DIRECTORIES: /etc/stupidchess/config

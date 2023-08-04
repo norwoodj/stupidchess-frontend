@@ -1,10 +1,13 @@
 import $ from "jquery";
-import {GameType, Color} from "./constants";
-
+import { GameType, Color } from "./constants";
 
 function toTitleCase(input) {
-    return input.split("_")
-        .map(str => str.charAt(0).toUpperCase() + str.substring(1).toLowerCase())
+    return input
+        .split("_")
+        .map(
+            (str) =>
+                str.charAt(0).toUpperCase() + str.substring(1).toLowerCase()
+        )
         .join(" ");
 }
 
@@ -21,8 +24,11 @@ function setupCsrfRequests() {
     let csrfToken = $("#csrf-token").data("token");
 
     $.ajaxSetup({
-        beforeSend: function(xhr, settings) {
-            if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+        beforeSend: function (xhr, settings) {
+            if (
+                !/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) &&
+                !this.crossDomain
+            ) {
                 xhr.setRequestHeader("X-CSRFToken", csrfToken);
             }
         }
@@ -31,7 +37,10 @@ function setupCsrfRequests() {
 
 let SETUP_SQUARES_FOR_COLOR = new Map([
     [Color.BLACK, new Set([0, 1, 2, 3, 10, 11, 12, 13, 20, 21, 22, 23])],
-    [Color.WHITE, new Set([94, 95, 96, 97, 104, 105, 106, 107, 114, 115, 116, 117])]
+    [
+        Color.WHITE,
+        new Set([94, 95, 96, 97, 104, 105, 106, 107, 114, 115, 116, 117])
+    ]
 ]);
 
 function isSquareInSetupZoneForColor(color, square) {
@@ -47,7 +56,11 @@ function getErrorMessage(errorResponse) {
         return "Unknown Server Error occurred. This means something's down, or John is a bad programmer, sorry";
     } else if (errorResponse.status == 404) {
         return "The resource that was requested does not exist!";
-    } else if (errorResponse.status >= 400 && errorResponse.responseJSON && errorResponse.responseJSON.message) {
+    } else if (
+        errorResponse.status >= 400 &&
+        errorResponse.responseJSON &&
+        errorResponse.responseJSON.message
+    ) {
         return errorResponse.responseJSON.message;
     } else {
         console.log(errorResponse);

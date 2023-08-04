@@ -4,10 +4,9 @@ import ReactTable from "react-table";
 import PagedListState from "../models/paged-list-state";
 import UpdatingSelect from "../components/updating-select";
 
-import {Color, GameType} from "../constants";
-import {toTitleCase} from "../util";
+import { Color, GameType } from "../constants";
+import { toTitleCase } from "../util";
 import timeago from "timeago.js";
-
 
 export default class GameList extends React.Component {
     constructor() {
@@ -23,8 +22,11 @@ export default class GameList extends React.Component {
     }
 
     componentDidMount() {
-        this.setState({pagedListState: this.pagedListState});
-        this.retrieveGames(this.state.pagedListState.pageStartOffset, this.state.pagedListState.pageSizeLimit);
+        this.setState({ pagedListState: this.pagedListState });
+        this.retrieveGames(
+            this.state.pagedListState.pageStartOffset,
+            this.state.pagedListState.pageSizeLimit
+        );
         this.retrieveGameCount();
     }
 
@@ -37,7 +39,14 @@ export default class GameList extends React.Component {
     }
 
     getUuidLinkElementForGame(game) {
-        return <a className={this.getUuidLinkClassName()} href={`/game?gameUuid=${game.id}`}>{game.id}</a>;
+        return (
+            <a
+                className={this.getUuidLinkClassName()}
+                href={`/game?gameUuid=${game.id}`}
+            >
+                {game.id}
+            </a>
+        );
     }
 
     getUserColor(game) {
@@ -54,22 +63,45 @@ export default class GameList extends React.Component {
 
         if (game.blackPlayerUuid != game.whitePlayerUuid) {
             if (myColor == Color.BLACK) {
-                return <a className={className} href={`/profile?userUuid=${game.whitePlayerUuid}`}>{game.whitePlayerName}</a>;
+                return (
+                    <a
+                        className={className}
+                        href={`/profile?userUuid=${game.whitePlayerUuid}`}
+                    >
+                        {game.whitePlayerName}
+                    </a>
+                );
             } else {
-                return <a className={className} href={`/profile?userUuid=${game.blackPlayerUuid}`}>{game.blackPlayerName}</a>;
+                return (
+                    <a
+                        className={className}
+                        href={`/profile?userUuid=${game.blackPlayerUuid}`}
+                    >
+                        {game.blackPlayerName}
+                    </a>
+                );
             }
         } else {
-            return (myColor == Color.BLACK) ? game.whitePlayerName : game.blackPlayerName;
+            return myColor == Color.BLACK
+                ? game.whitePlayerName
+                : game.blackPlayerName;
         }
     }
 
     getUserColorElement(game) {
         let myColor = this.getUserColor(game);
-        return <div className={`color-label-${myColor.toLowerCase()}`}>{toTitleCase(myColor)}</div>;
+        return (
+            <div className={`color-label-${myColor.toLowerCase()}`}>
+                {toTitleCase(myColor)}
+            </div>
+        );
     }
 
     retrieveGameCount() {
-        let gameType = (this.state.selectedGameType == "ALL") ? null : this.state.selectedGameType;
+        let gameType =
+            this.state.selectedGameType == "ALL"
+                ? null
+                : this.state.selectedGameType;
 
         this.doRetrieveGameCount(gameType).then((gameCount) => {
             this.pagedListState.updateForObjectCount(gameCount);
@@ -78,9 +110,16 @@ export default class GameList extends React.Component {
     }
 
     retrieveGames() {
-        let gameType = (this.state.selectedGameType == "ALL") ? null : this.state.selectedGameType;
+        let gameType =
+            this.state.selectedGameType == "ALL"
+                ? null
+                : this.state.selectedGameType;
 
-        this.doRetrieveGames(gameType, this.state.pagedListState.pageStartOffset, this.state.pagedListState.pageSizeLimit).then(games => {
+        this.doRetrieveGames(
+            gameType,
+            this.state.pagedListState.pageStartOffset,
+            this.state.pagedListState.pageSizeLimit
+        ).then((games) => {
             this.pagedListState.updateForObjects(games);
             this.setState(this.pagedListState);
         });
@@ -98,24 +137,49 @@ export default class GameList extends React.Component {
 
     getGamesTableColumns() {
         return [
-            {Header: "ID", Cell: row => this.getUuidLinkElementForGame(row.original)},
-            {Header: "Game Type", Cell: row => toTitleCase(row.original.type)},
-            {Header: "User Color", Cell: row => this.getUserColorElement(row.original)},
-            {Header: "Opponent", Cell: row => this.getOpponentNameElement(row.original, "")},
-            {Header: "Black Score", Cell: row => row.original.blackPlayerScore},
-            {Header: "White Score", Cell: row => row.original.whitePlayerScore},
-            {Header: "Last Move", Cell: row => this.timeAgo.format(row.original.lastUpdateTimestamp)}
+            {
+                Header: "ID",
+                Cell: (row) => this.getUuidLinkElementForGame(row.original)
+            },
+            {
+                Header: "Game Type",
+                Cell: (row) => toTitleCase(row.original.type)
+            },
+            {
+                Header: "User Color",
+                Cell: (row) => this.getUserColorElement(row.original)
+            },
+            {
+                Header: "Opponent",
+                Cell: (row) => this.getOpponentNameElement(row.original, "")
+            },
+            {
+                Header: "Black Score",
+                Cell: (row) => row.original.blackPlayerScore
+            },
+            {
+                Header: "White Score",
+                Cell: (row) => row.original.whitePlayerScore
+            },
+            {
+                Header: "Last Move",
+                Cell: (row) =>
+                    this.timeAgo.format(row.original.lastUpdateTimestamp)
+            }
         ];
     }
 
     handleNewGameType(gameType) {
-        this.setState(
-            {selectedGameType: gameType},
-            () => {
-                this.retrieveGames(this.state.pagedListState.pageStartOffset, this.state.pagedListState.pageSizeLimit);
-                this.retrieveGameCount(this.state.pagedListState.pageStartOffset, this.state.pagedListState.pageSizeLimit);
-            }
-        );
+        this.setState({ selectedGameType: gameType }, () => {
+            this.retrieveGames(
+                this.state.pagedListState.pageStartOffset,
+                this.state.pagedListState.pageSizeLimit
+            );
+            this.retrieveGameCount(
+                this.state.pagedListState.pageStartOffset,
+                this.state.pagedListState.pageSizeLimit
+            );
+        });
     }
 
     render() {
@@ -131,7 +195,9 @@ export default class GameList extends React.Component {
                 />
                 <ReactTable
                     manual
-                    getTrProps={(state, rowInfo) => rowInfo ? this.getRowPropsForGame(rowInfo.original) : {}}
+                    getTrProps={(state, rowInfo) =>
+                        rowInfo ? this.getRowPropsForGame(rowInfo.original) : {}
+                    }
                     columns={this.getGamesTableColumns()}
                     sortable={false}
                     loading={this.state.pagedListState.loading}

@@ -2,9 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import ReactTable from "react-table";
 import Checkbox from "muicss/lib/react/checkbox";
-import {GameType} from "../constants";
-import {toTitleCase} from "../util";
-
+import { GameType } from "../constants";
+import { toTitleCase } from "../util";
 
 export default class PlayerRecord extends React.Component {
     constructor() {
@@ -21,32 +20,49 @@ export default class PlayerRecord extends React.Component {
     }
 
     loadRecords() {
-        this.props.recordService.getUserGameRecords(this.props.userUuid, this.state.selectedGameType, this.state.includeOnePlayerGames).then(
-            playerRecords => this.setState({
-                playerRecords: this.convertPlayerRecordResponse(playerRecords),
-                loading: false
-            })
-        );
+        this.props.recordService
+            .getUserGameRecords(
+                this.props.userUuid,
+                this.state.selectedGameType,
+                this.state.includeOnePlayerGames
+            )
+            .then((playerRecords) =>
+                this.setState({
+                    playerRecords:
+                        this.convertPlayerRecordResponse(playerRecords),
+                    loading: false
+                })
+            );
     }
 
     convertPlayerRecordResponse(playerRecords) {
-        return GameType.all().map(gameType => Object.assign({gameType: toTitleCase(gameType)}, playerRecords[gameType]));
+        return GameType.all().map((gameType) =>
+            Object.assign(
+                { gameType: toTitleCase(gameType) },
+                playerRecords[gameType]
+            )
+        );
     }
 
     getPlayerRecordColumns() {
         return [
-            {Header: "Type", Cell: row => row.original.gameType},
-            {Header: "Games", Cell: row => row.original.wins + row.original.losses},
-            {Header: "Wins", Cell: row => row.original.wins},
-            {Header: "Losses", Cell: row => row.original.losses},
-            {Header: "Point Differential", Cell: row => row.original.pointDifferential}
+            { Header: "Type", Cell: (row) => row.original.gameType },
+            {
+                Header: "Games",
+                Cell: (row) => row.original.wins + row.original.losses
+            },
+            { Header: "Wins", Cell: (row) => row.original.wins },
+            { Header: "Losses", Cell: (row) => row.original.losses },
+            {
+                Header: "Point Differential",
+                Cell: (row) => row.original.pointDifferential
+            }
         ];
     }
 
     toggleIncludeOnePlayerGames(evt) {
-        this.setState(
-            {includeOnePlayerGames: evt.target.checked},
-            () => this.loadRecords()
+        this.setState({ includeOnePlayerGames: evt.target.checked }, () =>
+            this.loadRecords()
         );
     }
 

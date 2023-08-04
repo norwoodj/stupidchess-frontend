@@ -1,4 +1,3 @@
-
 class AbstractDisplayState {
     getSquareColor(square) {
         let rowIndex = Math.floor(square / 10);
@@ -40,7 +39,6 @@ class AbstractDisplayState {
         };
     }
 }
-
 
 class DefaultDisplayState extends AbstractDisplayState {
     getSquareColors() {
@@ -111,4 +109,4 @@ DISPLAY_STATES_BY_NAME.set("Christmas", ChristmasDisplayState);
 
 let DISPLAY_STATES_OPTIONS = ["Default", "Michigan", "Christmas"];
 
-export {DISPLAY_STATES_BY_NAME, DISPLAY_STATES_OPTIONS, DefaultDisplayState};
+export { DISPLAY_STATES_BY_NAME, DISPLAY_STATES_OPTIONS, DefaultDisplayState };

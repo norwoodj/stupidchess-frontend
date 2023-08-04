@@ -16,12 +16,19 @@ import SquareSelectionState from "../models/square-selection-state";
 import GameState from "../models/game-state";
 import AmbiguousMoveState from "../models/ambiguous-move-state";
 import PagedListState from "../models/paged-list-state";
-import {DISPLAY_STATES_BY_NAME, DISPLAY_STATES_OPTIONS, DefaultDisplayState} from "../models/display-states";
+import {
+    DISPLAY_STATES_BY_NAME,
+    DISPLAY_STATES_OPTIONS,
+    DefaultDisplayState
+} from "../models/display-states";
 
 import GameService from "../services/game-service";
-import {getMoveObjectForPieceMove, getMoveObjectForPlacePiece, getMoveObjectForReplacePiece} from "../factories/move-factory";
-import {getErrorMessage} from "../util";
-
+import {
+    getMoveObjectForPieceMove,
+    getMoveObjectForPlacePiece,
+    getMoveObjectForReplacePiece
+} from "../factories/move-factory";
+import { getErrorMessage } from "../util";
 
 export default class Game extends React.Component {
     constructor() {
@@ -49,7 +56,10 @@ export default class Game extends React.Component {
         if (this.props.error) {
             this.setState({
                 error: this.props.error,
-                gameService: new GameService(this.props.httpService, this.handleError.bind(this))
+                gameService: new GameService(
+                    this.props.httpService,
+                    this.handleError.bind(this)
+                )
             });
 
             return;
@@ -57,13 +67,18 @@ export default class Game extends React.Component {
 
         this.gameUuid = this.props.gameUuid;
         this.setState(
-            {gameService: new GameService(this.props.httpService, this.handleError.bind(this))},
+            {
+                gameService: new GameService(
+                    this.props.httpService,
+                    this.handleError.bind(this)
+                )
+            },
             () => this.start()
         );
     }
 
     handleError(error) {
-        this.setState({error: getErrorMessage(error)});
+        this.setState({ error: getErrorMessage(error) });
     }
 
     start() {
@@ -71,21 +86,25 @@ export default class Game extends React.Component {
     }
 
     retrieveMoveList() {
-        this.state.gameService.getMovesForGame(
-            this.gameUuid,
-            this.state.pagedListState.pageStartOffset,
-            this.state.pagedListState.pageSizeLimit
-        ).then(moves => {
-            this.pagedListState.updateForObjects(moves);
-            this.setState(this.pagedListState);
-        });
+        this.state.gameService
+            .getMovesForGame(
+                this.gameUuid,
+                this.state.pagedListState.pageStartOffset,
+                this.state.pagedListState.pageSizeLimit
+            )
+            .then((moves) => {
+                this.pagedListState.updateForObjects(moves);
+                this.setState(this.pagedListState);
+            });
     }
 
     retrieveMoveCount() {
-        this.state.gameService.getMoveCountForGame(this.gameUuid).then(moveCount => {
-            this.pagedListState.updateForObjectCount(moveCount);
-            this.setState(this.pagedListState);
-        });
+        this.state.gameService
+            .getMoveCountForGame(this.gameUuid)
+            .then((moveCount) => {
+                this.pagedListState.updateForObjectCount(moveCount);
+                this.setState(this.pagedListState);
+            });
     }
 
     handlePageChange(page) {
@@ -99,8 +118,9 @@ export default class Game extends React.Component {
     }
 
     retrieveNewGameState() {
-        this.state.gameService.getGameByUuid(this.gameUuid).then(
-            (gameResponse) => {
+        this.state.gameService
+            .getGameByUuid(this.gameUuid)
+            .then((gameResponse) => {
                 if (gameResponse.lastMove != this.gameState.lastMove) {
                     this.retrieveMoveCount();
                     this.retrieveMoveList();
@@ -116,7 +136,11 @@ export default class Game extends React.Component {
                     }
 
                     if (this.gameState.inBoardSetupMode()) {
-                        this.boardSetupState.updateFromColorsSettingUp(this.gameState.getColorsSettingUp(this.props.userUuid));
+                        this.boardSetupState.updateFromColorsSettingUp(
+                            this.gameState.getColorsSettingUp(
+                                this.props.userUuid
+                            )
+                        );
                     }
 
                     this.setState({
@@ -129,8 +153,7 @@ export default class Game extends React.Component {
                 }
 
                 setTimeout(() => this.retrieveNewGameState(), 5000);
-            }
-        );
+            });
     }
 
     handleColorSetupSelect(colorSelected) {
@@ -172,13 +195,15 @@ export default class Game extends React.Component {
             this.squareSelectionState.setSelected(square);
         }
 
-        this.setState({squareSelectionState: this.squareSelectionState});
+        this.setState({ squareSelectionState: this.squareSelectionState });
     }
 
     shouldHandleAsDisambiguatingCaptureSelection(square) {
         return (
             this.ambiguousMoveState.isAmbiguousDestinationSelected() &&
-            this.ambiguousMoveState.isDisambiguatingCaptureForSelectedSquare(square)
+            this.ambiguousMoveState.isDisambiguatingCaptureForSelectedSquare(
+                square
+            )
         );
     }
 
@@ -192,9 +217,11 @@ export default class Game extends React.Component {
     handleClickWhilePieceSelected(square) {
         if (this.squareSelectionState.isSquareSelected(square)) {
             this.handleClickOnSelectedSquare();
-        } else if (this.shouldDeactivateDisambiguatingCaptureSelection(square)) {
+        } else if (
+            this.shouldDeactivateDisambiguatingCaptureSelection(square)
+        ) {
             this.ambiguousMoveState.selectAmbiguousDestination(null);
-            this.setState({ambiguousMoveState: this.ambiguousMoveState});
+            this.setState({ ambiguousMoveState: this.ambiguousMoveState });
         } else if (this.shouldHandleAsDisambiguatingCaptureSelection(square)) {
             this.handleClickAmbiguousDestinationSelected(square);
         } else if (this.squareSelectionState.isSquarePossibleMove(square)) {
@@ -209,7 +236,7 @@ export default class Game extends React.Component {
     handleClickOnSelectedSquare() {
         this.squareSelectionState.clear();
         this.ambiguousMoveState.clear();
-        this.setState({squareSelectionState: this.squareSelectionState});
+        this.setState({ squareSelectionState: this.squareSelectionState });
     }
 
     handleClickAmbiguousDestinationSelected(square) {
@@ -219,16 +246,23 @@ export default class Game extends React.Component {
             square
         );
 
-        this.state.gameService.makeMove(this.gameUuid, movePieceMove).then(() => this.retrieveNewGameState());
+        this.state.gameService
+            .makeMove(this.gameUuid, movePieceMove)
+            .then(() => this.retrieveNewGameState());
     }
 
     handleClickOnPossibleMoveSquare(square) {
         if (this.ambiguousMoveState.isAmbiguousDestination(square)) {
             this.ambiguousMoveState.selectAmbiguousDestination(square);
-            this.setState({ambiguousMoveState: this.ambiguousMoveState});
+            this.setState({ ambiguousMoveState: this.ambiguousMoveState });
         } else {
-            let movePieceMove = getMoveObjectForPieceMove(this.squareSelectionState.getSelected(), square);
-            this.state.gameService.makeMove(this.gameUuid, movePieceMove).then(() => this.retrieveNewGameState());
+            let movePieceMove = getMoveObjectForPieceMove(
+                this.squareSelectionState.getSelected(),
+                square
+            );
+            this.state.gameService
+                .makeMove(this.gameUuid, movePieceMove)
+                .then(() => this.retrieveNewGameState());
         }
     }
 
@@ -239,19 +273,24 @@ export default class Game extends React.Component {
             return;
         }
 
-        this.state.gameService.getPossibleMoves(this.gameUuid, square).then(
-            (possibleMoveResponse) => {
-                possibleMoveResponse.possibleMoves.forEach(possibleMove => {
-                    this.squareSelectionState.addPossibleMove(possibleMove.destinationSquare);
+        this.state.gameService
+            .getPossibleMoves(this.gameUuid, square)
+            .then((possibleMoveResponse) => {
+                possibleMoveResponse.possibleMoves.forEach((possibleMove) => {
+                    this.squareSelectionState.addPossibleMove(
+                        possibleMove.destinationSquare
+                    );
 
                     if (possibleMove.hasOwnProperty("captures")) {
-                        possibleMove.captures.forEach(possibleCapture => {
-                            this.squareSelectionState.addPossibleCapture(possibleCapture.square);
+                        possibleMove.captures.forEach((possibleCapture) => {
+                            this.squareSelectionState.addPossibleCapture(
+                                possibleCapture.square
+                            );
                         });
                     }
                 });
 
-                possibleMoveResponse.ambiguousMoves.forEach(ambiguousMove => {
+                possibleMoveResponse.ambiguousMoves.forEach((ambiguousMove) => {
                     this.ambiguousMoveState.addAmbiguousMove(
                         ambiguousMove.destinationSquare,
                         ambiguousMove.disambiguatingCaptures
@@ -259,9 +298,10 @@ export default class Game extends React.Component {
                 });
 
                 this.squareSelectionState.setSelected(square);
-                this.setState({squareSelectionState: this.squareSelectionState});
-            }
-        );
+                this.setState({
+                    squareSelectionState: this.squareSelectionState
+                });
+            });
     }
 
     handlePlacePieceSelection(piece) {
@@ -271,17 +311,27 @@ export default class Game extends React.Component {
             return;
         }
 
-        let move = this.gameState.hasPieceOnSquare(this.squareSelectionState.getSelected())
-            ? getMoveObjectForReplacePiece(this.squareSelectionState.getSelected(), piece)
-            : getMoveObjectForPlacePiece(this.squareSelectionState.getSelected(), piece);
+        let move = this.gameState.hasPieceOnSquare(
+            this.squareSelectionState.getSelected()
+        )
+            ? getMoveObjectForReplacePiece(
+                  this.squareSelectionState.getSelected(),
+                  piece
+              )
+            : getMoveObjectForPlacePiece(
+                  this.squareSelectionState.getSelected(),
+                  piece
+              );
 
-        this.state.gameService.makeMove(this.gameUuid, move).then(() => this.retrieveNewGameState());
+        this.state.gameService
+            .makeMove(this.gameUuid, move)
+            .then(() => this.retrieveNewGameState());
     }
 
     handleDisplayStateChange(displayStateName) {
         let displayStateClass = DISPLAY_STATES_BY_NAME.get(displayStateName);
         this.displayState = new displayStateClass();
-        this.setState({displayState: this.displayState});
+        this.setState({ displayState: this.displayState });
     }
 
     render() {
@@ -290,15 +340,22 @@ export default class Game extends React.Component {
         }
 
         return (
-            <Container className="game-panel" style={this.displayState.getGamePanelStyle()} fluid={true}>
-                <ErrorElement error={this.state.error}/>
+            <Container
+                className="game-panel"
+                style={this.displayState.getGamePanelStyle()}
+                fluid={true}
+            >
+                <ErrorElement error={this.state.error} />
 
                 <div className="row">
-                    <Scoreboard gameState={this.state.gameState}/>
+                    <Scoreboard gameState={this.state.gameState} />
                 </div>
 
                 <div className="row">
-                    <Board clickHandler={this.handleBoardClick.bind(this)} {...this.state}/>
+                    <Board
+                        clickHandler={this.handleBoardClick.bind(this)}
+                        {...this.state}
+                    />
                     <div className="content-block mui-col-md-4 mui-col-sm-12">
                         <Container>
                             <CaptureGrid
@@ -316,25 +373,37 @@ export default class Game extends React.Component {
                             color={this.displayState.getPieceSelectGridColor()}
                             gameState={this.state.gameState}
                             boardSetupState={this.state.boardSetupState}
-                            pieceSelectionCallback={this.handlePlacePieceSelection.bind(this)}
+                            pieceSelectionCallback={this.handlePlacePieceSelection.bind(
+                                this
+                            )}
                         />
                         <ColorSetupSelect
                             gameState={this.state.gameState}
                             boardSetupState={this.state.boardSetupState}
-                            colorChangeHandler={this.handleColorSetupSelect.bind(this)}
-                            colorsSettingUp={this.state.gameState.getColorsSettingUp(this.props.userUuid)}
+                            colorChangeHandler={this.handleColorSetupSelect.bind(
+                                this
+                            )}
+                            colorsSettingUp={this.state.gameState.getColorsSettingUp(
+                                this.props.userUuid
+                            )}
                         />
                         <div className="content-block game-page-select">
                             <UpdatingSelect
                                 label="Change Theme"
                                 options={DISPLAY_STATES_OPTIONS}
-                                optionChangeHandler={this.handleDisplayStateChange.bind(this)}
+                                optionChangeHandler={this.handleDisplayStateChange.bind(
+                                    this
+                                )}
                             />
                         </div>
                         <MoveList
                             pagedListState={this.state.pagedListState}
-                            handlePageChangeFn={this.handlePageChange.bind(this)}
-                            handlePageSizeChangeFn={this.handlePageSizeChange.bind(this)}
+                            handlePageChangeFn={this.handlePageChange.bind(
+                                this
+                            )}
+                            handlePageSizeChangeFn={this.handlePageSizeChange.bind(
+                                this
+                            )}
                         />
                     </div>
                 </div>

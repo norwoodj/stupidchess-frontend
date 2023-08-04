@@ -2,7 +2,8 @@
  * Body CSS
  */
 
-table, body {
+table,
+body {
     border-collapse: collapse;
 }
 

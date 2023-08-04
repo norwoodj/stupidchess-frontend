@@ -19,7 +19,7 @@ deb: version.json
 	debuild
 
 nginx: version.json
-	cp version.json src/
+	mv version.json src/
 	docker-compose build nginx
 
 webpack_builder:

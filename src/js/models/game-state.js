@@ -1,6 +1,5 @@
-import {Color} from "../constants";
-import {isGameInBoardSetupMode, isSquareInSetupZoneForColor} from "../util";
-
+import { Color } from "../constants";
+import { isGameInBoardSetupMode, isSquareInSetupZoneForColor } from "../util";
 
 export default class GameState {
     constructor() {
@@ -30,9 +29,7 @@ export default class GameState {
     }
 
     getUserColor(userUuid) {
-        return (userUuid == this.blackPlayerUuid)
-            ? Color.BLACK
-            : Color.WHITE;
+        return userUuid == this.blackPlayerUuid ? Color.BLACK : Color.WHITE;
     }
 
     isMyTurn(userUuid) {
@@ -98,9 +95,13 @@ export default class GameState {
         this.gameResult = apiResponse.gameResult;
 
         this.pieces.clear();
-        apiResponse.pieces.forEach(piece => this.pieces.set(piece.square, piece));
+        apiResponse.pieces.forEach((piece) =>
+            this.pieces.set(piece.square, piece)
+        );
 
         this.squaresToBePlaced.clear();
-        apiResponse.squaresToBePlaced.forEach(square => this.squaresToBePlaced.add(square));
+        apiResponse.squaresToBePlaced.forEach((square) =>
+            this.squaresToBePlaced.add(square)
+        );
     }
 }

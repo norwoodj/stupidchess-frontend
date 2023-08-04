@@ -1,4 +1,3 @@
-
 export default class AmbiguousMoveState {
     constructor() {
         this.disambiguatingCapturesBySquare = new Map();
@@ -26,7 +25,9 @@ export default class AmbiguousMoveState {
     }
 
     isDisambiguatingCaptureForSelectedSquare(square) {
-        var disambiguatingCaptures = this.disambiguatingCapturesBySquare.get(this.selectedAmbiguousDestination);
+        var disambiguatingCaptures = this.disambiguatingCapturesBySquare.get(
+            this.selectedAmbiguousDestination
+        );
         return disambiguatingCaptures.includes(square);
     }
 

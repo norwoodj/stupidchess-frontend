@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {toTitleCase} from "../util";
-
+import { toTitleCase } from "../util";
 
 export default class UpdatingSelect extends React.Component {
     handleChangeEvent(e) {
@@ -19,8 +18,18 @@ export default class UpdatingSelect extends React.Component {
             <div className="mui-select">
                 <label>{this.props.label}</label>
                 <select onChange={this.handleChangeEvent.bind(this)}>
-                    {this.props.allOption ? <option value="ALL" key="ALL">All</option> : ""}
-                    {this.props.options.map(option => <option value={option} key={option}>{toTitleCase(option)}</option>)}
+                    {this.props.allOption ? (
+                        <option value="ALL" key="ALL">
+                            All
+                        </option>
+                    ) : (
+                        ""
+                    )}
+                    {this.props.options.map((option) => (
+                        <option value={option} key={option}>
+                            {toTitleCase(option)}
+                        </option>
+                    ))}
                 </select>
             </div>
         );

@@ -1,7 +1,6 @@
 import $ from "jquery";
 import overlay from "muicss/lib/js/overlay";
 
-
 function setupSideDrawerTransition() {
     var bodyEl = $("body"),
         sidedrawerEl = $("#sidedrawer");
@@ -10,9 +9,7 @@ function setupSideDrawerTransition() {
         // show overlay
         var options = {
             onclose: function () {
-                sidedrawerEl
-                    .removeClass("active")
-                    .appendTo(document.body);
+                sidedrawerEl.removeClass("active").appendTo(document.body);
             }
         };
 
@@ -25,11 +22,9 @@ function setupSideDrawerTransition() {
         }, 20);
     }
 
-
     function hideSidedrawer() {
         bodyEl.toggleClass("hide-sidedrawer");
     }
-
 
     $(".js-show-sidedrawer").on("click", showSidedrawer);
     $(".js-hide-sidedrawer").on("click", hideSidedrawer);
@@ -37,4 +32,4 @@ function setupSideDrawerTransition() {
     hideSidedrawer();
 }
 
-export {setupSideDrawerTransition};
+export { setupSideDrawerTransition };

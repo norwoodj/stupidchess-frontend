@@ -1,4 +1,3 @@
-
 export default class SquareSelectionState {
     constructor() {
         this.selected = null;
@@ -22,7 +21,7 @@ export default class SquareSelectionState {
         this.selected = square;
     }
 
-    isSquarePossibleMove(square)  {
+    isSquarePossibleMove(square) {
         return this.possibleMoves.has(square);
     }
 

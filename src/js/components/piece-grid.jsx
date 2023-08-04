@@ -1,21 +1,30 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {getPieceImage} from "../factories/piece-factory";
-import {range} from "../util";
-
+import { getPieceImage } from "../factories/piece-factory";
+import { range } from "../util";
 
 class PieceGridSquare extends React.Component {
     getSquareClassName() {
-        return `${this.props.defaultClass} ${this.props.piece != null ? "piece-square" : ""}`;
+        return `${this.props.defaultClass} ${
+            this.props.piece != null ? "piece-square" : ""
+        }`;
     }
 
     getPieceImage() {
-        return this.props.piece != null ? <img className="piece" src={getPieceImage(this.props.piece)}/> : "";
+        return this.props.piece != null ? (
+            <img className="piece" src={getPieceImage(this.props.piece)} />
+        ) : (
+            ""
+        );
     }
 
     render() {
         return (
-            <td className={this.getSquareClassName()} style={{background: this.props.color}} onClick={this.props.clickHandler}>
+            <td
+                className={this.getSquareClassName()}
+                style={{ background: this.props.color }}
+                onClick={this.props.clickHandler}
+            >
                 <div>{this.getPieceImage()}</div>
             </td>
         );
@@ -28,7 +37,6 @@ PieceGridSquare.propTypes = {
     defaultClass: PropTypes.string.isRequired,
     clickHandler: PropTypes.func.isRequired
 };
-
 
 export default class PieceGrid extends React.Component {
     getPieceGridSquareForIndices(rowIndex, cellIndex, gridShape) {
@@ -57,11 +65,19 @@ export default class PieceGrid extends React.Component {
         return (
             <div className={this.getGridClassName()}>
                 <table className="piece-grid non-board-grid">
-                    <tbody>{ range(gridShape.rows).map(rowIndex => (
-                        <tr key={rowIndex}>{ range(gridShape.columns).map(cellIndex => (
-                            this.getPieceGridSquareForIndices(rowIndex, cellIndex, gridShape)
-                        ))}</tr>
-                    ))}</tbody>
+                    <tbody>
+                        {range(gridShape.rows).map((rowIndex) => (
+                            <tr key={rowIndex}>
+                                {range(gridShape.columns).map((cellIndex) =>
+                                    this.getPieceGridSquareForIndices(
+                                        rowIndex,
+                                        cellIndex,
+                                        gridShape
+                                    )
+                                )}
+                            </tr>
+                        ))}
+                    </tbody>
                 </table>
             </div>
         );

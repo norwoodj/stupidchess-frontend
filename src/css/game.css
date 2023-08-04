@@ -39,7 +39,7 @@ table {
 }
 
 .piece-grid td:not(.piece-square) :after {
-    content: '';
+    content: "";
     display: block;
     margin-top: 100%;
 }
@@ -54,7 +54,10 @@ table {
     width: 100%;
     margin: 0 auto;
     table-layout: fixed;
-    font: 20px "Arial Black", Gadget, sans-serif;
+    font:
+        20px "Arial Black",
+        Gadget,
+        sans-serif;
 }
 
 .scoreboard-table td {
@@ -70,7 +73,10 @@ table {
 .scoreboard-table .score-score-cell {
     background-color: blue;
     color: yellow;
-    font: 20px "Arial Black", Gadget, sans-serif;
+    font:
+        20px "Arial Black",
+        Gadget,
+        sans-serif;
 }
 
 .scoreboard-table .current-turn {

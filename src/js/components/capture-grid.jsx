@@ -1,12 +1,13 @@
 import PropTypes from "prop-types";
 import PieceGrid from "./piece-grid";
-import {getCaptureShapeForGameType} from "../factories/board-shapes-factory";
-
+import { getCaptureShapeForGameType } from "../factories/board-shapes-factory";
 
 export default class CaptureGrid extends PieceGrid {
     getPieceForIndex(index) {
-        let piecesForColor = this.props.gameState.captures.filter(piece => piece.color == this.props.captureColor);
-        return (piecesForColor.length > index) ? piecesForColor[index] : null;
+        let piecesForColor = this.props.gameState.captures.filter(
+            (piece) => piece.color == this.props.captureColor
+        );
+        return piecesForColor.length > index ? piecesForColor[index] : null;
     }
 
     getSquareClassName() {
@@ -28,7 +29,6 @@ export default class CaptureGrid extends PieceGrid {
     getClickHandler() {
         return () => {};
     }
-
 }
 
 CaptureGrid.propTypes = {

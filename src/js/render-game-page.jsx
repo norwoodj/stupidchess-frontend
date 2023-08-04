@@ -7,10 +7,9 @@ import SideDrawer from "./components/side-drawer";
 import Footer from "./components/footer";
 import Game from "./components/game";
 
-import {setupSideDrawerTransition} from "./side-drawer-transition";
-import {MENU_CATEGORIES, APP_NAME} from "./constants";
-import {setupCsrfRequests} from "./util";
-
+import { setupSideDrawerTransition } from "./side-drawer-transition";
+import { MENU_CATEGORIES, APP_NAME } from "./constants";
+import { setupCsrfRequests } from "./util";
 
 $(() => {
     let gameUuid = $("#game-data").data("uuid");
@@ -21,8 +20,12 @@ $(() => {
 
     ReactDOM.render(
         <div id="react-root">
-            <SideDrawer pageName={APP_NAME} menuCategories={MENU_CATEGORIES}/>
-            <ScAppBar appName={APP_NAME} httpService={$} currentUsername={currentUsername}/>
+            <SideDrawer pageName={APP_NAME} menuCategories={MENU_CATEGORIES} />
+            <ScAppBar
+                appName={APP_NAME}
+                httpService={$}
+                currentUsername={currentUsername}
+            />
             <div id="content-wrapper">
                 <div className="mui--appbar-height"></div>
                 <Game
@@ -33,7 +36,7 @@ $(() => {
                 />
                 <div className="footer-height"></div>
             </div>
-            <Footer/>
+            <Footer />
         </div>,
         document.getElementById("content-root")
     );

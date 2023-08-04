@@ -3,12 +3,20 @@ set -o errexit; set -o nounset; set -o pipefail
 
 VERSION_FILES=(package.json package-lock.json)
 
+function next_version {
+	local next_version_base=$(date --utc "+%Y.%-m")
+	local num_released_this_month=$(git tag -l | grep -E "^${next_version_base}" | wc -l)
+
+	echo "${next_version_base}.${num_released_this_month}"
+}
+
 function main {
-	local last_release=$(git tag -l | tail -n 1)
-	local new_release=$(date --utc "+%y.%m%d.0")
+	local last_release=${OVERRIDE_LAST_VERSION:-$(git tag -l | tail -n 1)}
+	local new_release=$(next_version)
 
 	echo "Releasing version ${new_release}"
 	sed -i "s|${last_release}|${new_release}|g" ${VERSION_FILES[*]}
+	$(dirname ${0})/lint.sh
 
 	EMAIL=$(git config user.email) gbp dch --release --new-version=${new_release}
 
