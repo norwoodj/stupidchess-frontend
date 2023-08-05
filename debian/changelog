@@ -1,3 +1,12 @@
+stupidchess-nginx (2023.8.1) jammy; urgency=medium
+
+  * chore: Removes lint script in favor of a pre-commit hook
+  * fix: Updated node version to 18 and made necessary changes to get things working again
+  * chore: updates docs to reflect new local run port
+  * chore: updates location of frontend version file
+
+ -- John Norwood <norwood.john.m@gmail.com>  Sun, 06 Aug 2023 00:08:19 +0100
+
 stupidchess-nginx (2023.8.0) jammy; urgency=medium
 
   * fix: Fixes debuild process by adding back build target to Makefile, updates package-lock file
