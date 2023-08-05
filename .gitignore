@@ -3,8 +3,8 @@ __pycache__
 build
 *.egg-info
 *.tgz
-version.txt
-version.json
+frontend-version.json
+src/frontend-version.json
 update-versions
 dist
 node_modules
@@ -19,4 +19,4 @@ debian/stupidchess-nginx/lib
 debian/stupidchess-nginx/opt
 debian/stupidchess-nginx/usr
 debian/stupidchess-nginx/usr
-update-deb-version
+

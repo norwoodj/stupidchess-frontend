@@ -2,7 +2,6 @@ const path = require("path");
 const webpack = require("webpack");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 
-
 module.exports = {
     entry: {
         changePassword: "./src/js/render-change-password-form.jsx",
@@ -23,13 +22,13 @@ module.exports = {
     },
     plugins: [
         new webpack.optimize.ModuleConcatenationPlugin(),
-        new webpack.optimize.UglifyJsPlugin({minimize: true}),
+        new webpack.optimize.UglifyJsPlugin({ minimize: true }),
         new CopyWebpackPlugin([
-            {from: "src/version.json"},
-            {from: "src/css", to: "css/"},
-            {from: "src/img", to: "img/"},
-            {from: "src/favicons", to: "favicons/"},
-            {from: "node_modules/react-table/react-table.css", to: "css/"}
+            { from: "src/frontend-version.json" },
+            { from: "src/css", to: "css/" },
+            { from: "src/img", to: "img/" },
+            { from: "src/favicons", to: "favicons/" },
+            { from: "node_modules/react-table/react-table.css", to: "css/" }
         ])
     ],
     module: {
@@ -39,11 +38,13 @@ module.exports = {
                 enforce: "pre",
                 loader: "eslint-loader",
                 exclude: /node_modules/
-            }, {
+            },
+            {
                 test: /\.jsx?$/,
                 loader: "babel-loader",
                 exclude: /node_modules/
-            }, {
+            },
+            {
                 test: /\.json$/,
                 loader: "json-loader"
             }

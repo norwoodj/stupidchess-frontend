@@ -2,24 +2,24 @@ DOCKER_REPOSITORY := jnorwood
 
 build: dist
 
-dist: node_modules version.json
-	mv version.json src/
+dist: node_modules frontend-version.json
+	mv frontend-version.json src/
 	./node_modules/webpack/bin/webpack.js -p --progress
 
 node_modules:
 	npm install
 
 release:
-	./release.sh
+	./scripts/release.sh
 
-version.json:
-	echo '{"build-timestamp": "$(shell date --utc --iso-8601=seconds)", "revision": "$(shell git rev-parse HEAD)", "version": "$(shell git tag -l | tail -n 1)"}' | jq . > version.json
+frontend-version.json:
+	echo '{"build_timestamp": "$(shell date --utc --iso-8601=seconds)", "git_revision": "$(shell git rev-parse HEAD)", "version": "$(shell git describe)"}' | jq . > frontend-version.json
 
-deb: version.json
+deb:
 	debuild
 
-nginx: version.json
-	mv version.json src/
+nginx: frontend-version.json
+	mv frontend-version.json src/
 	docker-compose build nginx
 
 webpack_builder:
@@ -29,11 +29,12 @@ push: nginx
 	docker tag $(DOCKER_REPOSITORY)/stupidchess-nginx:current $(DOCKER_REPOSITORY)/stupidchess-nginx:$(shell git tag -l | tail -n 1)
 	docker push $(DOCKER_REPOSITORY)/stupidchess-nginx:$(shell git tag -l | tail -n 1)
 
-run: nginx
+run: frontend-version.json
+	mv frontend-version.json src/
 	docker-compose up
 
 down:
 	docker-compose down --volumes
 
 clean:
-	rm -vf version.json src/version.json
+	rm -vf frontend-version.json src/frontend-version.json
