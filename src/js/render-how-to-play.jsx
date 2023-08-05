@@ -70,7 +70,7 @@ $(() => {
                         <p>
                             Before the game begins, each player takes their half
                             of the board and sets up their starting pieces in
-                            secret. If you're playing a 2 player game, you won't
+                            secret. If you&apos;re playing a 2 player game, you won&apos;t
                             be able to see where the other player has placed
                             their pieces until both of you are done setting up.
                         </p>
@@ -88,8 +88,8 @@ $(() => {
                             chess except for a couple of quirks in the middle
                             board and the effect it has on pawns and checkers.
                             It matters for these two pieces and only these two
-                            pieces because they're the only pieces with a notion
-                            of "forward". This matters in the middle board
+                            pieces because they&apos;re the only pieces with a notion
+                            of &quot;forward&quot;. This matters in the middle board
                             because once one of these pieces moves into the 8x4
                             middle board section it can move forward in two
                             senses.
@@ -99,13 +99,13 @@ $(() => {
                             As you can see, the black pawn has to get to the
                             white side down and to the right and would have no
                             way to get there unless it could move in both of
-                            these "forward" directions. This principle works
+                            these &quot;forward&quot; directions. This principle works
                             just the same with checkers, though it is maybe a
                             bit more counterintuitive in this example. Even the
                             move down and to the left is a legal forward move
                             because it is forward in the left sense, even though
-                            it's backward in the up sense. The only place a
-                            white checker can't move in this example is down and
+                            it&apos;s backward in the up sense. The only place a
+                            white checker can&apos;t move in this example is down and
                             to the right, because it does not make any progress
                             towards the black pieces.
                         </p>
@@ -122,7 +122,7 @@ $(() => {
                             has in play. In practice, this is no different from
                             chess rules with one major exception. By getting a
                             checker to the end of the board, you get your
-                            checker "kinged". A checker king counts the same as
+                            checker &quot;kinged&quot;. A checker king counts the same as
                             a chess king in your score, so if a player like the
                             one in the above examples gets a checker kinged,
                             their score will increase by a point, and the other
@@ -140,19 +140,19 @@ $(() => {
                         <img src="/img/screenshots/pawn-promoted-checker-king.jpg" />
                         <h3>Miscellaneous</h3>
                         <p>
-                            That's pretty much it for the rules. There's still a
+                            That&apos;s pretty much it for the rules. There&apos;s still a
                             few odd things here and there, like that you are
                             allowed to capture your own pieces:
                         </p>
                         <img src="/img/screenshots/self-capture.jpg" />
                         <p>
                             Also, checkers can move twice on their first move
-                            because... they're like pawns I guess?
+                            because... they&apos;re like pawns I guess?
                         </p>
                         <img src="/img/screenshots/checker-move-twice.jpg" />
                         <p>
                             Checker kings can move twice on their first move
-                            too. Don't worry too much about the rules.
+                            too. Don&apos;t worry too much about the rules.
                         </p>
                     </Panel>
                 </Container>

@@ -14,5 +14,10 @@
         "no-underscore-dangle": "error",
         "quotes": ["error", "double"],
         "semi": "error"
+    },
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
     }
 }

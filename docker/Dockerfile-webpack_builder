@@ -1,4 +1,4 @@
-FROM node:10.15-alpine@sha256:aa28f3b6b4087b3f289bebaca8d3fb82b93137ae739aa67df3a04892d521958e
+FROM node:18-bookworm@sha256:a52ed7aa0ea502c2e06a1066c80a8adf4163d4edc47ee3257e573cd55a7828b0
 LABEL maintainer=norwood.john.m@gmail.com
 
 WORKDIR /etc/stupidchess

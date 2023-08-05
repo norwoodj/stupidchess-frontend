@@ -37,7 +37,7 @@ $(() => {
                             is deployed on a raspberry pi cluster running
                             kubernetes. Visit my github to view the salt-stack
                             configuration, build tools, and custom docker images
-                            I've built to deploy this and other projects on this
+                            I&apos;ve built to deploy this and other projects on this
                             platform.
                         </p>
                         <p>
@@ -54,7 +54,7 @@ $(() => {
                         <img src="/img/screenshots/after-board-setup.jpg" />
                         <p>
                             Stupid Chess is a variant on the popular Chess and
-                            checkers board games that John Norwood (that's me)
+                            checkers board games that John Norwood (that&apos;s me)
                             and some of his college friends invented when we
                             stumbled across a chess board that had been ripped
                             in half and an incomplete set of pieces. It has a

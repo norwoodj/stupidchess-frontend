@@ -34,10 +34,8 @@ the related [backend project](https://github.com/norwoodj/stupidchess-backend).
 
 
 ### Building and Developing Locally
-In order to build, run and develop this project locally you'll need a number of things installed:
-
-* docker - 17.06 or newer
-* docker-compose - 1.16.1 or newer
+The main make target builds the distribution artifact, this has been tested with node version 18
+most recently.
 
 To build the three docker images and start the application locally run:
 ```

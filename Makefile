@@ -25,11 +25,9 @@ nginx: version.json
 webpack_builder:
 	docker-compose build webpack_builder
 
-push: nginx webpack_builder
+push: nginx
 	docker tag $(DOCKER_REPOSITORY)/stupidchess-nginx:current $(DOCKER_REPOSITORY)/stupidchess-nginx:$(shell git tag -l | tail -n 1)
-	docker tag $(DOCKER_REPOSITORY)/stupidchess-webpack_builder:current $(DOCKER_REPOSITORY)/stupidchess-webpack_builder:$(shell git tag -l | tail -n 1)
 	docker push $(DOCKER_REPOSITORY)/stupidchess-nginx:$(shell git tag -l | tail -n 1)
-	docker push $(DOCKER_REPOSITORY)/stupidchess-webpack_builder:$(shell git tag -l | tail -n 1)
 
 run: nginx
 	docker-compose up
