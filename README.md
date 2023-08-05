@@ -37,15 +37,14 @@ the related [backend project](https://github.com/norwoodj/stupidchess-backend).
 The main make target builds the distribution artifact, this has been tested with node version 18
 most recently.
 
-To build the three docker images and start the application locally run:
+There is a docker-compose setup for running locally. To start run the following,
+then navigate to http://localhost:23180 in your browser.
 ```
 make run
 ```
 
-You can then go to a browser window and open [localhost](http://localhost) to view stupidchess running locally.
-
 This is setup to include local code changes in the running docker containers as volumes and to use auto-reload
-for the flask python server and --watch for webpack. In this way your code will get rebuilt and the server
+with --watch for webpack. In this way your code will get rebuilt and the server
 reloaded as you make changes.
 
 ### Releasing
