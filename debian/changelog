@@ -1,3 +1,9 @@
+stupidchess-nginx (2023.9.0) jammy; urgency=medium
+
+  * chore: updates image versions from backend repo
+
+ -- John Norwood <norwood.john.m@gmail.com>  Sat, 23 Sep 2023 14:58:12 +0100
+
 stupidchess-nginx (2023.8.1) jammy; urgency=medium
 
   * chore: Removes lint script in favor of a pre-commit hook
