@@ -7,6 +7,6 @@
     notifempty
     dateext
     postrotate
-        systemctl reload stupidchess.nginx
+        systemctl reload stupidchess-nginx
     endscript
 }
