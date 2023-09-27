@@ -1,3 +1,9 @@
+stupidchess-nginx (2023.9.3) jammy; urgency=medium
+
+  * fix: Fixes service name in logrotate file and logs errors to stderr
+
+ -- John Norwood <norwood.john.m@gmail.com>  Wed, 27 Sep 2023 22:45:42 +0100
+
 stupidchess-nginx (2023.9.2) jammy; urgency=medium
 
   * chore: Moves error_log directive in conf and removes tcp listener
