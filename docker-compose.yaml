@@ -18,7 +18,7 @@ services:
         target: /run/stupidchess
 
   nginx:
-    image: jnorwood/stupidchess-nginx:current
+    image: jnorwood/stupidchess-nginx
     build:
       context: .
       dockerfile: docker/Dockerfile-nginx
@@ -39,7 +39,7 @@ services:
         target: /run/stupidchess-nginx
 
   socat:
-    image: jnorwood/stupidchess-socat:current
+    image: jnorwood/stupidchess-socat
     build:
       context: docker
       dockerfile: Dockerfile-socat
@@ -52,7 +52,7 @@ services:
         target: /run/stupidchess-nginx
 
   webpack_builder:
-    image: jnorwood/stupidchess-webpack_builder:current
+    image: jnorwood/stupidchess-webpack_builder
     build:
       context: .
       dockerfile: docker/Dockerfile-webpack_builder

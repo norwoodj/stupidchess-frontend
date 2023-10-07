@@ -26,7 +26,7 @@ webpack_builder:
 	docker-compose build webpack_builder
 
 push: nginx
-	docker tag $(DOCKER_REPOSITORY)/stupidchess-nginx:current $(DOCKER_REPOSITORY)/stupidchess-nginx:$(shell git tag -l | tail -n 1)
+	docker tag $(DOCKER_REPOSITORY)/stupidchess-nginx $(DOCKER_REPOSITORY)/stupidchess-nginx:$(shell git tag -l | tail -n 1)
 	docker push $(DOCKER_REPOSITORY)/stupidchess-nginx:$(shell git tag -l | tail -n 1)
 
 run: frontend-version.json
