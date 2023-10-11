@@ -1,3 +1,13 @@
+stupidchess-nginx (2023.10.0) jammy; urgency=medium
+
+  * chore: Updates docker images in docker-compose to better reflect what will soon be deployed
+  * chore: no longer tag local images :current
+  * fix: Fixes logrotate file to properly signal nginx to reload its log files
+  * fix: Changes nginx to access log to journal, and removes no longer needed logrotate script
+  * chore: use local uwsgi profile in docker run config
+
+ -- John Norwood <norwood.john.m@gmail.com>  Wed, 11 Oct 2023 21:58:35 +0100
+
 stupidchess-nginx (2023.9.3) jammy; urgency=medium
 
   * fix: Fixes service name in logrotate file and logs errors to stderr
