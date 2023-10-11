@@ -6,6 +6,10 @@ services:
 
   uwsgi:
     image: jnorwood/stupidchess-uwsgi:2023.9.1
+    entrypoint:
+      - uwsgi
+      - --ini
+      - /etc/stupidchess/uwsgi.ini:local
     environment:
       JCONFIGURE_ACTIVE_PROFILES: LCL
       JCONFIGURE_CONFIG_DIRECTORIES: /etc/stupidchess/config
