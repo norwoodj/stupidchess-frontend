@@ -7,7 +7,7 @@ LABEL maintainer=norwood.john.m@gmail.com
 ARG APP_DIR=/etc/stupidchess
 WORKDIR ${APP_DIR}
 
-COPY package.json .
+COPY package.json package-lock.json .
 RUN npm install
 
 COPY .babelrc .
@@ -26,18 +26,13 @@ FROM nginx:1.25.1-bookworm@sha256:d2b2f2980e9ccc570e5726b56b54580f23a018b7b7314c
 LABEL maintainer=norwood.john.m@gmail.com
 
 ARG APP_DIR=/etc/stupidchess
-ARG LOG_DIR=/var/log/stupidchess
 ARG RUNTIME_DIR=/run/stupidchess-nginx
-ARG USER=stupidchess
 
 WORKDIR ${APP_DIR}
 
-RUN mkdir -p ${LOG_DIR} \
-    && mkdir -p ${RUNTIME_DIR} \
-    && ln -s /dev/stdout ${LOG_DIR}/nginx-access.log \
-    && ln -s /dev/stderr ${LOG_DIR}/nginx-errors.log
+RUN mkdir -p ${RUNTIME_DIR}
 
 COPY --from=artifacts ${APP_DIR}/dist ./dist
 COPY nginx.conf ${APP_DIR}/nginx.conf
 
-ENTRYPOINT ["nginx", "-c", "/etc/stupidchess/nginx.conf", "-g", "daemon off; user root;"]
+ENTRYPOINT ["bash", "-c", "ln -s /run/systemd/journal/dev-log /dev/log && nginx -c /etc/stupidchess/nginx.conf -g 'daemon off; user root;'"]
