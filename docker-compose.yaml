@@ -5,7 +5,7 @@ services:
     image: mongo:4.4-focal@sha256:0032f4a04bf96ca9c69665a553198148bdd8ec8caf556eb6281a464d3cb32470
 
   uwsgi:
-    image: jnorwood/stupidchess-uwsgi:2023.9.1
+    image: jnorwood/stupidchess-uwsgi:2023.10.0
     entrypoint:
       - uwsgi
       - --ini
