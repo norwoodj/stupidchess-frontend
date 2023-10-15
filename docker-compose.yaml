@@ -39,18 +39,35 @@ services:
         source: stupidchess-nginx-runtime
         target: /run/stupidchess-nginx
       - type: volume
-        source: stupidchess-nginx-logs
+        source: stupidchess-journal-logs
         target: /run/systemd/journal
+      - type: volume
+        source: stupidchess-nginx-exporter-logs
+        target: /run/stupidchess-nginx-exporter
 
   journald:
-    image: jnorwood/stupidchess-journald
+    image: jnorwood/stupidchess-syslog
     build:
       context: docker
-      dockerfile: Dockerfile-journald
+      dockerfile: Dockerfile-syslog
+    environment:
+      SOCKET_PATH: /run/systemd/journal/dev-log
     volumes:
       - type: volume
-        source: stupidchess-nginx-logs
+        source: stupidchess-journal-logs
         target: /run/systemd/journal
+
+  nginx-log-exporter:
+    image: jnorwood/stupidchess-syslog
+    build:
+      context: docker
+      dockerfile: Dockerfile-syslog
+    environment:
+      SOCKET_PATH: /run/stupidchess-nginx-exporter/syslog.sock
+    volumes:
+      - type: volume
+        source: stupidchess-nginx-exporter-logs
+        target: /run/stupidchess-nginx-exporter
 
   socat:
     image: jnorwood/stupidchess-socat
@@ -86,6 +103,7 @@ services:
 
 volumes:
   frontend-public-volume:
-  stupidchess-nginx-logs:
+  stupidchess-journal-logs:
+  stupidchess-nginx-exporter-logs:
   stupidchess-nginx-runtime:
   stupidchess-sockets:
