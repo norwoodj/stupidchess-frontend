@@ -1,3 +1,9 @@
+stupidchess-nginx (2024.6.0) jammy; urgency=medium
+
+  * chore: Updates stupidchess homepage and README with updated deployment information
+
+ -- John Norwood <norwood.john.m@gmail.com>  Sun, 30 Jun 2024 17:22:32 +0100
+
 stupidchess-nginx (2023.10.1) jammy; urgency=medium
 
   * chore: Updates uwsgi image to 2023.10.0
