@@ -34,22 +34,22 @@ $(() => {
                         <p>
                             This is a web-based board game running on a
                             python-flask/mongo backend with a react frontend. It
-                            is deployed on a raspberry pi cluster running
-                            kubernetes. Visit my github to view the salt-stack
-                            configuration, build tools, and custom docker images
-                            I&apos;ve built to deploy this and other projects on this
-                            platform.
+                            is deployed on a raspberry pi running in my house.
+                            Here&apos;s the <a href="https://github.com/norwoodj/rpi-salt">salt configuration</a>{" "}
+                            used to do that.
                         </p>
                         <p>
-                            You can see this particular project{" "}
+                           You can see the code for this project{" "}
                             <a href="https://github.com/norwoodj/stupidchess">
                                 here
                             </a>
                             .
                         </p>
                         <p>
-                            You might also visit my other project{" "}
-                            <a href="https://hashbash.dev">hashbash</a>.
+                            You might also visit my other projects{" "}
+                            <a href="https://hashbash.jmn23.com">hashbash</a> and{" "}
+                            <a href="https://bolas.jmn23.com">bolas</a>. My
+                            personal website can be found <a href="https://jmn23.com">here</a>.
                         </p>
                         <img src="/img/screenshots/after-board-setup.jpg" />
                         <p>
