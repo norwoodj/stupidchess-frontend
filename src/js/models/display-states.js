@@ -18,11 +18,11 @@ class AbstractDisplayState {
     }
 
     getPossibleMoveBackground() {
-        return "yellow";
+        return "#ffcb05";
     }
 
     getSquareNeedsPlacedBackground() {
-        return "yellow";
+        return "#ffcb05";
     }
 
     getPossibleCaptureBackground() {
@@ -52,15 +52,15 @@ class DefaultDisplayState extends AbstractDisplayState {
 
 class MichiganDisplayState extends AbstractDisplayState {
     getCaptureGridColor() {
-        return "yellow";
+        return "#ffcb05";
     }
 
     getPieceSelectGridColor() {
-        return "yellow";
+        return "#ffcb05";
     }
 
     getSquareColors() {
-        return ["navy", "yellow"];
+        return ["#00274c", "#ffcb05"];
     }
 
     getGamePanelBackgroundImage() {
@@ -98,7 +98,7 @@ class ChristmasDisplayState extends AbstractDisplayState {
     }
 
     getPossibleCaptureBackground() {
-        return "navy";
+        return "#00274c";
     }
 }
 

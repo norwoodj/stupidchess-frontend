@@ -71,8 +71,8 @@ table {
 }
 
 .scoreboard-table .score-score-cell {
-    background-color: blue;
-    color: yellow;
+    background-color: #00274c;
+    color: #ffcb05;
     font:
         20px "Arial Black",
         Gadget,
@@ -80,7 +80,7 @@ table {
 }
 
 .scoreboard-table .current-turn {
-    border: yellow solid 3px;
+    border: #ffcb05 solid 3px;
 }
 
 .move-table {

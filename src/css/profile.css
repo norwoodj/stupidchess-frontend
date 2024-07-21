@@ -18,12 +18,12 @@ body {
 }
 
 .game-tie {
-    background: navy;
+    background: #00274c;
     color: white;
 }
 
 .game-my-turn {
-    background: yellow;
+    background: #ffcb05;
     color: black;
 }
 

@@ -38,18 +38,18 @@ img {
 }
 
 .skin-element {
-    background: navy;
+    background: #00274c;
     color: white;
 }
 
 .button {
-    background-color: navy;
+    background-color: #00274c;
     color: white;
 }
 
 .button:hover {
-    background-color: navy;
-    color: yellow;
+    background-color: #00274c;
+    color: #ffcb05;
 }
 
 .uuid-link {
@@ -57,7 +57,7 @@ img {
 }
 
 .link {
-    color: yellow;
+    color: #ffcb05;
 }
 
 .error-bar {
