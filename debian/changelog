@@ -1,3 +1,9 @@
+stupidchess-nginx (2024.7.0) jammy; urgency=medium
+
+  * feat: Updates the colors to look a little cleaner and not to match any university in particular
+
+ -- John Norwood <norwood.john.m@gmail.com>  Sun, 21 Jul 2024 14:43:46 +0100
+
 stupidchess-nginx (2024.6.0) jammy; urgency=medium
 
   * chore: Updates stupidchess homepage and README with updated deployment information
@@ -153,4 +159,8 @@ stupidchess-nginx (19.1111) unstable; urgency=low
  -- John Norwood <norwood.john.m@gmail.com>  Mon, 11 Nov 2019 02:43:59 +0000
 
 stupidchess-nginx (19.1109.0) unstable; urgency=low
+
+  * fix: make this not warn for syntax error?
+
+ -- John Norwood <norwood.john.m@gmail.com>  Mon, 10 Nov 2019 02:43:59 +0000
 
