@@ -1,3 +1,9 @@
+stupidchess-nginx (2024.7.2) jammy; urgency=medium
+
+  * chore: old release messed up, building new
+
+ -- John Norwood <norwood.john.m@gmail.com>  Mon, 22 Jul 2024 00:52:42 +0100
+
 stupidchess-nginx (2024.7.1) jammy; urgency=medium
 
   * feat: A few more minor UI tweaks
