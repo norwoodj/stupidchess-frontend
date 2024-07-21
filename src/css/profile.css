@@ -27,6 +27,10 @@ body {
     color: black;
 }
 
+.game-my-turn a {
+    color: #00274c;
+}
+
 .game-win .color-label-black {
     color: black;
 }

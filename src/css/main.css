@@ -42,6 +42,18 @@ img {
     color: white;
 }
 
+.skin-element a:hover {
+    color: #ffcb05;
+}
+
+a {
+    color: #ffcb05;
+}
+
+a:hover {
+    color: #00274c;
+}
+
 .button {
     background-color: #00274c;
     color: white;
