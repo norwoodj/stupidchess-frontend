@@ -1,3 +1,9 @@
+stupidchess-nginx (2024.7.1) jammy; urgency=medium
+
+  * feat: A few more minor UI tweaks
+
+ -- John Norwood <norwood.john.m@gmail.com>  Mon, 22 Jul 2024 00:05:15 +0100
+
 stupidchess-nginx (2024.7.0) jammy; urgency=medium
 
   * feat: Updates the colors to look a little cleaner and not to match any university in particular
