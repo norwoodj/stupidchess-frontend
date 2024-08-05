@@ -20,10 +20,10 @@ deb:
 
 nginx: frontend-version.json
 	mv frontend-version.json src/
-	docker-compose build nginx
+	docker compose build nginx
 
 webpack_builder:
-	docker-compose build webpack_builder
+	docker compose build webpack_builder
 
 push: nginx
 	docker tag $(DOCKER_REPOSITORY)/stupidchess-nginx $(DOCKER_REPOSITORY)/stupidchess-nginx:$(shell git tag -l | tail -n 1)
@@ -31,10 +31,10 @@ push: nginx
 
 run: frontend-version.json
 	mv frontend-version.json src/
-	docker-compose up
+	docker compose up
 
 down:
-	docker-compose down --volumes
+	docker compose down --volumes
 
 clean:
 	rm -vf frontend-version.json src/frontend-version.json

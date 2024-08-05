@@ -1,5 +1,4 @@
-stupidchess-frontend
-====================
+# stupidchess-frontend
 
 ![active-game](board.png)
 
@@ -22,6 +21,7 @@ https://stupidchess.jmn23.com/how-to-play
 ```
 
 ### This Codebase
+
 This code was largely written as an exploration of how to effectively build and deploy flask/mongo/react
 projects as well as a way to get the rules of a game that I really enjoy codified in a meaningful way.
 
@@ -31,13 +31,14 @@ as an indication of my skillset.
 This codebase holds the frontend code for the stupidchess project, and relies on images built by
 the related [backend project](https://github.com/norwoodj/stupidchess-backend).
 
-
 ### Building and Developing Locally
+
 The main make target builds the distribution artifact, this has been tested with node version 18
 most recently.
 
 There is a docker-compose setup for running locally. To start run the following,
 then navigate to http://localhost:23180 in your browser.
+
 ```
 make run
 ```
@@ -47,24 +48,29 @@ with --watch for webpack. In this way your code will get rebuilt and the server
 reloaded as you make changes.
 
 ### Releasing
+
 There's a make target for releasing
+
 ```
 make release
 ```
 
 This is only tested on linux and requires you have installed some dependencies with:
+
 ```
 sudo apt install git-buildpackage
 ```
 
 ### Building Debian Package
+
 There's a make target for building this project's debian package
+
 ```
 make deb
 ```
 
 This is only tested on linux and requires you have installed some dependencies with:
+
 ```
 sudo apt install devscripts debhelper
 ```
-

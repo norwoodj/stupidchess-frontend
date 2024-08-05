@@ -35,11 +35,14 @@ $(() => {
                             This is a web-based board game running on a
                             python-flask/mongo backend with a react frontend. It
                             is deployed on a raspberry pi running in my house.
-                            Here&apos;s the <a href="https://github.com/norwoodj/rpi-salt">salt configuration</a>{" "}
+                            Here&apos;s the{" "}
+                            <a href="https://github.com/norwoodj/rpi-salt">
+                                salt configuration
+                            </a>{" "}
                             used to do that.
                         </p>
                         <p>
-                           You can see the code for this project{" "}
+                            You can see the code for this project{" "}
                             <a href="https://github.com/norwoodj/stupidchess">
                                 here
                             </a>
@@ -47,15 +50,21 @@ $(() => {
                         </p>
                         <p>
                             You might also visit my other projects{" "}
-                            <a href="https://hashbash.jmn23.com">hashbash</a> and{" "}
-                            <a href="https://bolas.jmn23.com">bolas</a>. My
-                            personal website can be found <a href="https://jmn23.com">here</a>.
+                            <a href="https://hashbash.jmn23.com">hashbash</a>{" "}
+                            and <a href="https://bolas.jmn23.com">bolas</a>. My
+                            personal website can be found{" "}
+                            <a href="https://jmn23.com">here</a>. Here&apos;s a
+                            link to my{" "}
+                            <a href="https://github.com/norwoodj/docs/blob/master/docs/resume.md">
+                                resume
+                            </a>
+                            .
                         </p>
                         <img src="/img/screenshots/after-board-setup.jpg" />
                         <p>
                             Stupid Chess is a variant on the popular Chess and
-                            checkers board games that John Norwood (that&apos;s me)
-                            and some of his college friends invented when we
+                            checkers board games that John Norwood (that&apos;s
+                            me) and some of his college friends invented when we
                             stumbled across a chess board that had been ripped
                             in half and an incomplete set of pieces. It has a
                             number of delightful rule changes over these earlier
