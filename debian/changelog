@@ -1,3 +1,9 @@
+stupidchess-nginx (2024.8.0) jammy; urgency=medium
+
+  * chore: adds a link to my resume and runs prettier
+
+ -- John Norwood <norwood.john.m@gmail.com>  Mon, 05 Aug 2024 19:11:28 +0100
+
 stupidchess-nginx (2024.7.2) jammy; urgency=medium
 
   * chore: old release messed up, building new
